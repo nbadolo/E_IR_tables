@@ -13,9 +13,9 @@ import matplotlib
 import matplotlib.pyplot as plt
 import pandas as pd
 
-file_path_l = '/home/nbadolo/Bureau/Aymard/These/for_papers/used_tables/large_log.ods'
-file_path_s = '/home/nbadolo/Bureau/Aymard/These/for_papers/used_tables/short_log.ods'
-file_path_r = '/home/nbadolo/Bureau/Aymard/These/for_papers/used_tables/resol_log.ods'
+file_path_l = '/home/nbadolo/Bureau/Aymard/These/for_biblio_papers/used_tables/large_log.ods'
+file_path_s = '/home/nbadolo/Bureau/Aymard/These/for_biblio_papers/used_tables/short_log.ods'
+file_path_r = '/home/nbadolo/Bureau/Aymard/These/for_biblio_papers/used_tables/resol_log.ods'
 
 df_l = pd.read_excel(file_path_l)
 df_s = pd.read_excel(file_path_s)
