@@ -91,19 +91,14 @@ print(np.max(e_ir_s))
 ## Premiere façon de representer:  x = V; y = E_IR; color = J-K
 plt.figure(figsize=(11, 10))
 plt.rcParams['font.size'] = '20' #change font size globally
-plt.scatter(v_mag_s, e_ir_s, s = mean_s*150, c = m_j_k_s, cmap = 'inferno')
-plt.scatter(v_mag_l, e_ir_l, s = mean_l*40, c = m_j_k_l, cmap = 'inferno')
+plt.scatter(v_mag_s, e_ir_s, s = mean_s*150, c = m_j_k_s, cmap = 'inferno_r')
+plt.scatter(v_mag_l, e_ir_l, s = mean_l*40, c = m_j_k_l, cmap = 'inferno_r')
 plt.legend(["Study sample", "McDonald et al. 2012, 2017"], prop={'size': 20})
-#plt.scatter(diff_pm, std_plus/mean, s=stat_plus*2.5, c=stat_plus, cmap = 'hsv_r')
 cbar = plt.colorbar() #, ticks=range(0, len(mean), 3))
 cbar.set_label('J-K mag', fontsize = 22, weight = 'bold')
 plt.xlabel("Magnitude in V band", fontsize = 22, weight = 'bold')
 #plt.xticks(fontsize = 20, weight = 'bold')
 plt.ylabel("E_IR", fontsize = 22, weight = 'bold')
-# #plt.ylabel("$\dfrac{\sigma}{mean}$", fontsize = 22, weight = 'bold')
-# plt.yticks(fontsize = 20, weight = 'bold')
-# plt.savefig('{}/std_vs_diff_vs_nb_FEROS.png'.format(sav_im, dpi=300, bbox_inches='tight'))
-#plt.savefig('{}/stdmean_vs_diff_vs_nb1_FEROS.png'.format(sav_im, dpi=300, bbox_inches='tight'))
 plt.savefig('/home/nbadolo/Bureau/Aymard/These/for_biblio_papers/plots/log_paper_plots/' + 'E_IR_f_V_J_K_magn.pdf', 
                 dpi=100, bbox_inches ='tight')
 
@@ -114,20 +109,30 @@ plt.close()
 #%%
 ## deuxieme façon de representer:  x = V; y = E_IR; size = J-K N.B: no colorbar here
 plt.figure(figsize=(11, 10))
-plt.rcParams['font.size'] = '20' #change font size globally
-plt.scatter(v_mag_s, e_ir_s, s = m_j_k_s*150, color='b')
-plt.scatter(v_mag_l, e_ir_l, s = m_j_k_l*150, color ='gray')
-plt.legend(["Study sample", "McDonald et al. 2012, 2017"], prop={'size': 20})
-#plt.scatter(diff_pm, std_plus/mean, s=stat_plus*2.5, c=stat_plus, cmap = 'hsv_r')
-#cbar = plt.colorbar() #, ticks=range(0, len(mean), 3))
-#cbar.set_label('J-K mag', fontsize = 22, weight = 'bold')
+
+## Pour la distance, utiliser les trois lignes suivantes pour la taille. le tittre de la legende sera alors: title="[1/D(en mpc)]", la distance sera exprimer en mpc
+# fact = 1
+# area_t = 1/(df_t["d"]/1000)
+# s = area_t*fact
+#c = np.random.randint(1, 5, size = N)
+fig, ax = plt.subplots()
+#x, y = np.random.rand(2, 575)
+#x, y = df_t["V"], df_t["E_IR"]
+fig, ax = plt.subplots()
+
+#plt.rcParams['font.size'] = '20' #change font size globally
+
+scatter = ax.scatter(v_mag_s, e_ir_s, c='b', s = m_j_k_s*10)
+scatter2 = ax.scatter(v_mag_l, e_ir_l, c='gray', s = m_j_k_l*10)
+
+# plt.scatter(v_mag_s, e_ir_s, s = m_j_k_s*1, color='b')
+# plt.scatter(v_mag_l, e_ir_l, s = m_j_k_l*1, color ='gray')
+handles, labels = scatter.legend_elements(prop="sizes", num = 4, alpha = 0.6)
+legend1 = plt.legend(["Study sample", "McDonald et al. 2017, 2012"], prop={'size': 10}, loc="upper left")
+legend2 = ax.legend(handles, labels, loc="upper left", title= " 10[J-K]", bbox_to_anchor=(1.05, 1.0), prop={'size': 10}, fontsize = 10)
+plt.gca().add_artist(legend1)
 plt.xlabel("Magnitude in V band", fontsize = 22, weight = 'bold')
-#plt.xticks(fontsize = 20, weight = 'bold')
 plt.ylabel("E_IR", fontsize = 22, weight = 'bold')
-# #plt.ylabel("$\dfrac{\sigma}{mean}$", fontsize = 22, weight = 'bold')
-# plt.yticks(fontsize = 20, weight = 'bold')
-# plt.savefig('{}/std_vs_diff_vs_nb_FEROS.png'.format(sav_im, dpi=300, bbox_inches='tight'))
-#plt.savefig('{}/stdmean_vs_diff_vs_nb1_FEROS.png'.format(sav_im, dpi=300, bbox_inches='tight'))
 plt.savefig('/home/nbadolo/Bureau/Aymard/These/for_biblio_papers/plots/log_paper_plots/' + 'E_IR_f_V_J_K_magn2.pdf', 
                 dpi=100, bbox_inches ='tight')
 
@@ -135,3 +140,5 @@ plt.savefig('/home/nbadolo/Bureau/Aymard/These/for_biblio_papers/plots/log_paper
                 dpi=100, bbox_inches ='tight')
 plt.show()
 plt.close()
+
+

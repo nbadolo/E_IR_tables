@@ -12,7 +12,7 @@ Created on Thu Mar 23 16:11:16 2023
 import os
 import  jpype     
 import  asposecells     
-jpype.startJVM() 
+#jpype.startJVM() 
 from asposecells.api import Workbook
 import glob # pour changer l'extension des fichiers
 import pandas as pd 
@@ -88,4 +88,4 @@ for fic in os.listdir(path_txt) :
     print(file_txt)   
 print(os.listdir(path_csv))
 print(str(len(os.listdir(path_csv))) + ' tables sed ont été converties en tables csv')
-jpype.shutdownJVM()
+#jpype.shutdownJVM()

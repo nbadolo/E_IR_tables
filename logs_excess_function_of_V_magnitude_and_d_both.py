@@ -29,7 +29,7 @@ df_r = pd.read_excel(file_path_r)
 
 
 #colors = np.random.rand(N)
-fact = 10000
+fact = 1
 area_l = 1/df_l["d"]*fact 
 area_s = 1/df_s["d"]*fact
 area_r = 1/df_r["d"]*fact
@@ -46,11 +46,11 @@ plt.title('The width of the dots is proportional to the distance from the star w
 plt.xlabel('V', size=20)
 plt.ylabel('E_IR', size=20)
 
-plt.savefig('/home/nbadolo/Bureau/Aymard/These/for_papers/plots/log_paper_plots/' + 'E_IR_f_d_V_magn.pdf', 
+plt.savefig('/home/nbadolo/Bureau/Aymard/These/for_biblio_papers/plots/log_paper_plots/' + 'E_IR_f_d_V_magn.pdf', 
                 dpi=100, bbox_inches ='tight')
 
 
-plt.savefig('/home/nbadolo/Bureau/Aymard/These/for_papers/plots/log_paper_plots/' + 'E_IR_f_d_V_magn.png', 
+plt.savefig('/home/nbadolo/Bureau/Aymard/These/for_biblio_papers/plots/log_paper_plots/' + 'E_IR_f_d_V_magn.png', 
                 dpi=100, bbox_inches ='tight')
 plt.tight_layout()
 plt.show()
@@ -81,28 +81,38 @@ plt.show()
 
 #%%
 # open file
-file_path_t = '/home/nbadolo/Bureau/Aymard/These/for_papers/used_tables/test_log.ods'
+file_path_t = '/home/nbadolo/Bureau/Aymard/These/for_biblio_papers/used_tables/test_log.ods'
 df_t = pd.read_excel(file_path_t)
 N = len(df_t["d"])
-print(N)
-area_t = 1/df_t["d"]*fact
-s = area_t 
+#print(N)
+fact = 1
+area_t = 1/(df_t["d"]/1000)
+s = area_t*fact
 c = np.random.randint(1, 5, size = N)
+fig, ax = plt.subplots()
 #x, y = np.random.rand(2, 575)
 x, y = df_t["V"], df_t["E_IR"]
 fig, ax = plt.subplots()
+print(df_t["d"][0])
+print(area_t[0])
+print(s[0])
+#stop
 
-scatter = ax.scatter(x, y, c='y', s=s)
+scatter = ax.scatter(x, y, c='b', s =s, label="Study sample")
+scatter2 = ax.scatter(x+1, y, c='r', s =s, label="McDonald et al. 2017, 2012")
 handles, labels = scatter.legend_elements(prop="sizes", num = 4, alpha = 0.6)
-legend2 = ax.legend(handles, labels, loc="upper right", title="Sizes")
+legend1 = ax.legend((["McDonald et al. 2017, 2012", "our sample"]), prop={'size': 7}, loc="upper left")
+legend2 = ax.legend(handles, labels, loc="upper right", title="[1/D(en mpc)]")
+plt.gca().add_artist(legend1) # permet d'afficher les deux légndes à a fois
+
 print(handles)
 print(labels)
 
-# là c'est okay
+# là c'est okay, c'est parfait
 #%%  A travailler !!!!!
 plt.clf()
 fig.set_size_inches(18.5, 10, forward = True)
-plt.scatter(df_t["V"], df_t["E_IR"], s=area_t, c='g') #, marker= "*" )
+plt.scatter(df_t["V"], df_t["E_IR"], s=s, c='g') #, marker= "*" )
 plt.scatter(1.5*df_t["V"], 2*df_t["E_IR"], s=area_t*2, c='y') # , marker= "*")
 # plt.scatter(df_r["V"], df_r["E_IR"], s=area_r, c='b')
 plt.legend(["McDonald et al. 2017, 2012", "our sample"], prop={'size': 22})
